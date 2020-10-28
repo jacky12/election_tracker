@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import County from './County'
 import Legend from "./Legend";
 import Treemap from "./Treemap";
-import dem_legend from './../../../assets/images/dem_legend.png';
-import gop_legend from './../../../assets/images/gop_legend.png';
+import dem_legend from './../dem_legend.png';
+import gop_legend from './../gop_legend.png';
 // import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`

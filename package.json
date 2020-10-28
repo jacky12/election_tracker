@@ -15,8 +15,7 @@
   "scripts": {
     "build": "yarn --cwd frontend install && yarn --cwd frontend build",
     "deploy": "cp -a frontend/build/. public/",
-    "heroku-postbuild": "yarn build && yarn deploy",
-    "postinstall": "cd frontend && yarn run build"
+    "heroku-postbuild": "yarn build && yarn deploy"
   },
   "keywords": [],
   "author": "",

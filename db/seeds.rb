@@ -12,7 +12,9 @@ Madison.states.map do |state|
     State.create(name: state['name'])
 end
 
-results = CSV.parse(File.read("./storage/2016_US_County_Level_Presidential_Results.csv"), headers: true)
+curDir = File.dirname(__FILE__)
+path_to_seed_data = File.join(curDir, "2016_US_County_Level_Presidential_Results.csv")
+results = CSV.parse(File.read(path_to_seed_data), headers: true)
 puts results.length
 results.map do |entry|
     full_state_name = Madison.get_name(entry['state_abbr'])

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
 import styled from 'styled-components'
-import County from './County'
-import Legend from "./Legend";
 import Treemap from "./Treemap";
 import dem_legend from './../dem_legend.png';
 import gop_legend from './../gop_legend.png';

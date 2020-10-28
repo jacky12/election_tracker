@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_09_15_210554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "city", primary_key: "city_id", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
     t.integer "search_area_id"
+  end
+
+  create_table "counties", force: :cascade do |t|
+    t.string "name"
+    t.integer "dem"
+    t.integer "gop"
+    t.bigint "state_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.integer "precincts_reporting"
+    t.integer "total_precincts"
+    t.float "percentage_precincts_reporting"
+    t.index ["state_id"], name: "index_counties_on_state_id"
   end
 
   create_table "neighborhood", primary_key: "neighborhood_id", id: :serial, force: :cascade do |t|
@@ -58,6 +72,13 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "auth_srid"
     t.string "srtext", limit: 2048
     t.string "proj4text", limit: 2048
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
   end
 
   create_table "survey", primary_key: "survey_id", id: :serial, force: :cascade do |t|
@@ -110,5 +131,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "notes", limit: 255
   end
 
+  add_foreign_key "counties", "states"
   add_foreign_key "zipcode", "search_area", primary_key: "search_area_id", name: "zipcode_search_area_id_fkey"
 end

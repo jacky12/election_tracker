@@ -1,5 +1,5 @@
 class Api::V1::StatesController < ApplicationController
-    protect_from_forgery with: :null_session
+    # protect_from_forgery with: :null_session
     def index
         states = State.all
         render json: StateSerializer.new(states, options).serialized_json

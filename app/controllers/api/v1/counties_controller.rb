@@ -1,5 +1,5 @@
 class Api::V1::CountiesController < ApplicationController
-    protect_from_forgery with: :null_session
+    # protect_from_forgery with: :null_session
     def create
         county = state.counties.new(county_params)
 

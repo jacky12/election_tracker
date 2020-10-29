@@ -43,3 +43,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'madison'
 
 gem 'fast_jsonapi'
+
+gem 'google-api-client', '~> 0.34'

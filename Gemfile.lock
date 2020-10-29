@@ -84,6 +84,10 @@ GEM
       retriable (>= 2.0, < 4.0)
       rexml
       signet (~> 0.12)
+    google_drive (3.0.5)
+      google-api-client (>= 0.11.0, < 1.0.0)
+      googleauth (>= 0.5.0, < 1.0.0)
+      nokogiri (>= 1.5.3, < 2.0.0)
     googleauth (0.14.0)
       faraday (>= 0.17.3, < 2.0)
       jwt (>= 1.4, < 3.0)
@@ -198,7 +202,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   fast_jsonapi
-  google-api-client (~> 0.34)
+  google_drive
   listen (~> 3.2)
   madison
   pg (>= 0.18, < 2.0)

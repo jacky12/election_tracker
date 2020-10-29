@@ -44,4 +44,4 @@ gem 'madison'
 
 gem 'fast_jsonapi'
 
-gem 'google-api-client', '~> 0.34'
+gem "google_drive"

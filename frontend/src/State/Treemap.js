@@ -87,7 +87,6 @@ function Treemap({ width, height, data }){
             .attr('height', function (d) { return d.y1 - d.y0; })
             .style("stroke", "black")
             .style("fill", function(d){ return color(d.parent.data.name, d.data.percentReporting)} )
-            .style("opacity", function(d){ return opacity(d.data.value)})
 
         nodes.exit().remove()
 

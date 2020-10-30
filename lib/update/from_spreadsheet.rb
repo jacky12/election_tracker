@@ -1,5 +1,6 @@
 require "google_drive"
 require 'googleauth'
+require 'update/db_func'
 
 module Update
     module FromSpreadsheet
@@ -12,13 +13,19 @@ module Update
             end
             spreadsheet = session.spreadsheet_by_title("Live Results")
 
+            states_to_be_removed = State.pluck(:name)
+
+
             spreadsheet.worksheets.each do |ws|
                 state_name = ws.title
                 state = State.find_by(slug: state_name.parameterize)
                 if !state
-                    state = State.create(name: state_name.parameterize)
+                    state = State.create(name: state_name)
+                else
+                    states_to_be_removed.delete(state_name)
                 end
 
+                counties_to_be_removed = state.counties.pluck(:name)
                 ws.list.each do |row|
                     county_name = row["County"]
                     county = state.counties.find_by(slug: county_name.parameterize)
@@ -34,9 +41,13 @@ module Update
                             )
                     else
                         county.update({:dem => dem_count, :gop => gop_count, :percentage_precincts_reporting => percentage_reporting})
+                        counties_to_be_removed.delete(county_name)
                     end
                 end
+                remove_counties(state_name, counties_to_be_removed)
             end
+
+            remove_states(states_to_be_removed)
         end
     end
 end

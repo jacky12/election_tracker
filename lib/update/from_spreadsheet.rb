@@ -9,7 +9,9 @@ module Update
                 session = GoogleDrive::Session.from_service_account_key("election-tracker-19a00db0d21f.json")
             else
                 auth_creds = Google::Auth::ServiceAccountCredentials.make_creds(json_key_io: StringIO.new(ENV['CREDS']))
-                session = GoogleDrive::Session.from_credentials(auth_creds)
+                puts auth_creds
+                session = GoogleDrive::Session.from_credentials(auth_creds) 
+                puts session
             end
             spreadsheet = session.spreadsheet_by_title("Live Results")
 

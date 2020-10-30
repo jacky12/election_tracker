@@ -16,15 +16,18 @@ module Update
                 ws.list.each do |row|
                     county_name = row["County"]
                     county = state.counties.find_by(slug: county_name.parameterize)
+                    dem_count = row["Democrat"].delete(",").to_i
+                    gop_count = row["Republican"].delete(",").to_i
+                    percentage_reporting = row["Percentage Reporting"].delete("%").to_i
                     if !county
                         County.create(name: county_name,
-                            dem: row["Democrat"],
-                            gop: row["Republican"],
+                            dem: dem_count,
+                            gop: gop_count,
                             state_id: state.id,
-                            percentage_precincts_reporting: row["Percentage Reporting"],
+                            percentage_precincts_reporting: percentage_reporting,
                             )
                     else
-                        county.update({:dem => row["Democrat"], :gop => row["Republican"], :percentage_precincts_reporting => row["Percentage Reporting"]})
+                        county.update({:dem => dem_count, :gop => gop_count, :percentage_precincts_reporting => percentage_reporting})
                     end
                 end
             end

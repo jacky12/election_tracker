@@ -11,7 +11,7 @@ module Update
             else
                 google_creds_str = ENV["CREDS"]
                 google_creds = JSON.parse(google_creds_str)
-                auth_creds = Google::Auth.UserRefreshCredentials.read_json_key(google_creds)
+                auth_creds = Google::Auth::UserRefreshCredentials.read_json_key(google_creds)
                 session = GoogleDrive::Session.from_credentials(auth_creds)
             end
             spreadsheet = session.spreadsheet_by_title("Live Results")

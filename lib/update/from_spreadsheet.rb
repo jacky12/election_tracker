@@ -14,10 +14,8 @@ module Update
                 ws.list.each do |row|
                     county_name = row["County"]
                     county = state.counties.find_by(slug: county_name.parameterize)
-
-                    county.update({:dem => row["Biden"], :gop => row["Trump"], :percentage_precincts_reporting => row["Percentage Reporting"]})
+                    county.update({:dem => row["Democrat"], :gop => row["Republican"], :percentage_precincts_reporting => row["Percentage Reporting"]})
                 end
-
             end
         end
     end

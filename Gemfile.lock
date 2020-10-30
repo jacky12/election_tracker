@@ -203,6 +203,7 @@ DEPENDENCIES
   byebug
   fast_jsonapi
   google_drive
+  googleauth
   listen (~> 3.2)
   madison
   pg (>= 0.18, < 2.0)

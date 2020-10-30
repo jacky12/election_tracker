@@ -45,3 +45,5 @@ gem 'madison'
 gem 'fast_jsonapi'
 
 gem "google_drive"
+
+gem 'googleauth'

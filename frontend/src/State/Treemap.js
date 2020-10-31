@@ -58,11 +58,6 @@ function Treemap({ width, height, data }){
             }
         }
 
-        const opacity = d3.scaleLinear()
-            .domain([10, 30])
-            .range([.5,1]);
-
-
         // Select the nodes
         var nodes = svg
                     .selectAll("rect")
@@ -75,7 +70,6 @@ function Treemap({ width, height, data }){
                 .attr('y', function (d) { return d.y0; })
                 .attr('width', function (d) { return d.x1 - d.x0; })
                 .attr('height', function (d) { return d.y1 - d.y0; })
-                .style("opacity", function(d){ return opacity(d.data.value)})
                 .style("fill", function(d){ return color(d.parent.data.name, d.data.percentReporting)} )
         
         // draw rectangles

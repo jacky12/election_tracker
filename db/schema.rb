@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_210554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
 
   create_table "city", primary_key: "city_id", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
@@ -67,13 +66,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_210554) do
     t.float "bb_w_lng"
   end
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
-  end
-
   create_table "states", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -81,56 +73,5 @@ ActiveRecord::Schema.define(version: 2020_09_15_210554) do
     t.string "slug"
   end
 
-  create_table "survey", primary_key: "survey_id", id: :serial, force: :cascade do |t|
-    t.date "survey_date", default: -> { "('now'::text)::date" }
-    t.string "survey_description", limit: 255
-    t.integer "search_area_id"
-    t.string "comment", limit: 255
-    t.string "survey_method", limit: 20, default: "neighborhood"
-    t.integer "status", limit: 2
-  end
-
-  create_table "survey_progress_log", primary_key: "page_id", id: :integer, default: -> { "nextval('survey_search_page_page_id_seq'::regclass)" }, force: :cascade do |t|
-    t.integer "survey_id", null: false
-    t.string "room_type", limit: 255, null: false
-    t.integer "neighborhood_id"
-    t.integer "page_number", null: false
-    t.integer "guests", null: false
-    t.integer "has_rooms", limit: 2
-    t.string "zoomstack", limit: 255
-  end
-
-  create_table "survey_progress_log_bb", primary_key: "survey_id", id: :integer, default: nil, force: :cascade do |t|
-    t.string "room_type", limit: 255
-    t.integer "guests"
-    t.float "price_min"
-    t.float "price_max"
-    t.string "quadtree_node", limit: 1024
-    t.datetime "last_modified", default: -> { "now()" }
-    t.text "median_node"
-  end
-
-  create_table "zipcode", primary_key: "zipcode", id: :string, limit: 10, force: :cascade do |t|
-    t.integer "search_area_id"
-  end
-
-  create_table "zipcode_us", primary_key: "zip", id: :integer, default: nil, force: :cascade do |t|
-    t.string "type", limit: 20
-    t.string "primary_city", limit: 50
-    t.string "acceptable_cities", limit: 300
-    t.string "state", limit: 3
-    t.string "county", limit: 50
-    t.string "timezone", limit: 50
-    t.string "area_code", limit: 50
-    t.decimal "latitude", precision: 6, scale: 2
-    t.decimal "longitude", precision: 6, scale: 2
-    t.string "world_region", limit: 10
-    t.string "country", limit: 20
-    t.integer "decommissioned"
-    t.integer "estimated_population"
-    t.string "notes", limit: 255
-  end
-
   add_foreign_key "counties", "states"
-  add_foreign_key "zipcode", "search_area", primary_key: "search_area_id", name: "zipcode_search_area_id_fkey"
 end

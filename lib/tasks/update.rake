@@ -12,4 +12,10 @@ namespace :update do
     Update::FromSpreadsheet.load
   end
 
+  task :truncate => :environment do
+    ActiveRecord::Base.connection.tables.each do |table|
+      ActiveRecord::Base.connection.execute("TRUNCATE #{table} CASCADE")
+    end
+  end
+
 end

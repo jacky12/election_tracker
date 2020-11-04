@@ -31,7 +31,7 @@ module Update
                     county = state.counties.find_by(slug: county_name.parameterize)
                     dem_count = row["Democrat"].delete(",").to_i
                     gop_count = row["Republican"].delete(",").to_i
-                    percentage_reporting = row["Percentage Reporting"].delete("%").to_i
+                    percentage_reporting = row["Percentage Reporting"].gsub(/[a-zA-Z]/,'').strip.delete("%").to_i
                     if !county
                         County.create(name: county_name,
                             dem: dem_count,
